@@ -1,4 +1,4 @@
-FROM php:8.2-apache
+FROM php:8.3-apache
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
@@ -27,9 +27,10 @@ WORKDIR /var/www/html
 # Copy application files
 COPY . /var/www/html
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html/uploads
+# Set permissions (Create logs folder explicitly and allow optional write)
+RUN mkdir -p /var/www/html/uploads/logs \
+    && chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 /var/www/html/uploads
 
 # Expose port (App Platform handles this, but good practice)
 EXPOSE 80
