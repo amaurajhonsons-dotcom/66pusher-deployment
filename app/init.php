@@ -28,11 +28,16 @@ const CACHE_DEFAULT_SECONDS = 2592000;
 
 /* Starting to include the required files */
 require_once APP_PATH . 'includes/debug.php';
-if(!DEBUG) require_once APP_PATH . 'includes/500.php';
+if (!DEBUG)
+    require_once APP_PATH . 'includes/500.php';
 require_once APP_PATH . 'includes/product.php';
 
 /* Config file */
 require_once ROOT_PATH . 'config.php';
+
+error_log("RUNTIME DEBUG: SITE_URL=" . (defined('SITE_URL') ? SITE_URL : 'NOT_DEFINED'));
+error_log("RUNTIME DEBUG: DB_HOST=" . (defined('DATABASE_SERVER') ? DATABASE_SERVER : 'NOT_DEFINED'));
+error_log("RUNTIME DEBUG: DB_PORT=" . (defined('DATABASE_PORT') ? DATABASE_PORT : 'NOT_DEFINED'));
 
 /* Establish cookie / session on this path specifically */
 define('COOKIE_PATH', preg_replace('|https?://[^/]+|i', '', SITE_URL));
@@ -49,32 +54,32 @@ session_set_cookie_params([
 ]);
 
 /* Autoloader */
-spl_autoload_register (function ($class) {
+spl_autoload_register(function ($class) {
     $namespace_prefix = 'Altum';
     $split = explode('\\', $class);
 
-    if($split[0] !== $namespace_prefix) {
+    if ($split[0] !== $namespace_prefix) {
         return;
     }
 
     /* Altum core */
-    if(isset($split[1]) && !isset($split[2])) {
+    if (isset($split[1]) && !isset($split[2])) {
         require_once APP_PATH . 'core/' . $split[1] . '.php';
     }
 
     /* Traits, Models, Helpers */
-    if(isset($split[1], $split[2]) && in_array($split[1], ['Traits', 'Models', 'Helpers'])) {
+    if (isset($split[1], $split[2]) && in_array($split[1], ['Traits', 'Models', 'Helpers'])) {
         $folder = mb_strtolower($split[1]);
         require_once APP_PATH . $folder . '/' . $split[2] . '.php';
     }
 
     /* Payment Gateways helpers */
-    if(isset($split[1], $split[2]) && $split[1] == 'PaymentGateways') {
+    if (isset($split[1], $split[2]) && $split[1] == 'PaymentGateways') {
         require_once APP_PATH . 'helpers/payment-gateways/' . $split[2] . '.php';
     }
 
     /* Qr codes helpers */
-    if(isset($split[1], $split[2]) && $split[1] == 'QrCodes') {
+    if (isset($split[1], $split[2]) && $split[1] == 'QrCodes') {
         require_once APP_PATH . 'helpers/qr-codes/' . $split[2] . '.php';
     }
 });
