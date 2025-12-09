@@ -28,7 +28,10 @@ class Database
     {
         mysqli_report(MYSQLI_REPORT_OFF);
 
-        self::$database = @new \mysqli(
+        self::$database = @mysqli_init();
+        self::$database->options(MYSQLI_OPT_CONNECT_TIMEOUT, 10); // Fail fast
+        self::$database->ssl_set(NULL, NULL, NULL, NULL, NULL); // Enable SSL (Insecure/No cert check but encrypted)
+        @self::$database->real_connect(
             DATABASE_SERVER,
             DATABASE_USERNAME,
             DATABASE_PASSWORD,
