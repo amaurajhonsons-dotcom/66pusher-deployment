@@ -250,93 +250,77 @@ if (file_exists(ROOT . 'install/installed')) {
                                             <code>https://subdomain.domain.com/</code> <br />Subfolder example:
                                             <code>https://domain.com/product/</code></small>
                                     </div>
-
-                                    <h3 class="mt-5">Database Details</h3>
-                                    <p>Fill in the database details that you will use for the installation of this
-                                        product.</p>
-
-                                    <div class="form-group">
-                                        <label for="database_host">Host</label>
-                                        <input type="text" class="form-control" id="database_host" name="database_host"
-                                            value="localhost" required="required">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="database_name">Name</label>
-                                        <input type="text" class="form-control" id="database_name" name="database_name"
-                                            required="required">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="database_username">Username</label>
-                                        <input type="text" class="form-control" id="database_username"
-                                            name="database_username" required="required">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="database_password">Password</label>
-                                        <input type="password" class="form-control" id="database_password"
-                                            name="database_password">
-                                    </div>
-
-
-                                    <h3 class="mt-5">Keep in touch</h3>
-                                    <p>Subscribe to the newsletter and you will receive email updates of <strong>new
-                                            products</strong>, <strong>discounts</strong> and <strong>product
-                                            updates</strong>.</p>
-
-                                    <div class="form-group row">
-                                        <label for="newsletter_email" class="col-sm-2 col-form-label">Email</label>
-                                        <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="newsletter_email"
-                                                name="newsletter_email" placeholder="Your valid email address">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label for="newsletter_name" class="col-sm-2 col-form-label">Name</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="newsletter_name"
-                                                name="newsletter_name" placeholder="Your full name">
-                                        </div>
-                                    </div>
-                                    <p class="text-muted"><small>Leave the fields empty if you do not wish to subscribe
-                                            to the newsletter.</small></p>
-
-                                    <button type="submit" name="submit" class="btn btn-block btn-primary mt-4">Finish
-                                        installation</button>
-                                </form>
-                            </section>
-
-                            <section id="finish" style="display: none">
-                                <h2 class="mb-4">Finish</h2>
-
-                                <div class="alert alert-success">The installation process has been successfuly
-                                    completed!</div>
-
-                                <div class="table-responsive table-custom-container mt-4">
-                                    <table class="table table-custom">
-                                        <tbody>
-                                            <tr>
-                                                <td class="font-weight-bold">URL</td>
-                                                <td><a href="" id="final_url"></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-weight-bold">Username</td>
-                                                <td>admin</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="font-weight-bold">Password</td>
-                                                <td>admin</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </section>
                         </div>
+
+                        <div class="form-group">
+                            <label for="database_username">Username</label>
+                            <input type="text" class="form-control" id="database_username" name="database_username"
+                                required="required">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="database_password">Password</label>
+                            <input type="password" class="form-control" id="database_password" name="database_password">
+                        </div>
+
+
+                        <h3 class="mt-5">Keep in touch</h3>
+                        <p>Subscribe to the newsletter and you will receive email updates of <strong>new
+                                products</strong>, <strong>discounts</strong> and <strong>product
+                                updates</strong>.</p>
+
+                        <div class="form-group row">
+                            <label for="newsletter_email" class="col-sm-2 col-form-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="newsletter_email" name="newsletter_email"
+                                    placeholder="Your valid email address">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="newsletter_name" class="col-sm-2 col-form-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="newsletter_name" name="newsletter_name"
+                                    placeholder="Your full name">
+                            </div>
+                        </div>
+                        <p class="text-muted"><small>Leave the fields empty if you do not wish to subscribe
+                                to the newsletter.</small></p>
+
+                        <button type="submit" name="submit" class="btn btn-block btn-primary mt-4">Finish
+                            installation</button>
+                        </form>
+                        </section>
+
+                        <section id="finish" style="display: none">
+                            <h2 class="mb-4">Finish</h2>
+
+                            <div class="alert alert-success">The installation process has been successfuly
+                                completed!</div>
+
+                            <div class="table-responsive table-custom-container mt-4">
+                                <table class="table table-custom">
+                                    <tbody>
+                                        <tr>
+                                            <td class="font-weight-bold">URL</td>
+                                            <td><a href="" id="final_url"></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight-bold">Username</td>
+                                            <td>admin</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="font-weight-bold">Password</td>
+                                            <td>admin</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </main>
 

@@ -46,14 +46,17 @@ foreach ($required_fields as $field) {
 }
 
 foreach (['database_host', 'database_name', 'database_username', 'database_password'] as $key) {
-    $_POST[$key] = str_replace('\'', '\\\'', $_POST[$key]);
+    $_POST[$key] = trim(str_replace('\'', '\\\'', $_POST[$key]));
 }
 
-/* Parse Host:Port */
+/* Parse Host/Port */
 $db_host = $_POST['database_host'];
-$db_port = 3306;
+$db_port = isset($_POST['database_port']) ? (int) $_POST['database_port'] : 3306;
+
+/* Fallback for Host:Port syntax if user pasted it in Host field */
 if (strpos($db_host, ':') !== false) {
-    list($db_host, $db_port) = explode(':', $db_host);
+    list($db_host, $db_port_override) = explode(':', $db_host);
+    $db_port = (int) $db_port_override;
 }
 
 /* Make sure the database details are correct */
@@ -63,24 +66,24 @@ try {
     $database = mysqli_init();
     $database->options(MYSQLI_OPT_CONNECT_TIMEOUT, 10);
     $database->ssl_set(NULL, NULL, NULL, NULL, NULL);
-    $database->real_connect(
+    @$database->real_connect(
         $db_host,
         $_POST['database_username'],
         $_POST['database_password'],
         $_POST['database_name'],
-        (int) $db_port
+        $db_port
     );
 } catch (\Exception $exception) {
     die(json_encode([
         'status' => 'error',
-        'message' => 'The database connection has failed: ' . $exception->getMessage()
+        'message' => 'The database connection has failed: ' . $exception->getMessage() . ' (Host: ' . $db_host . ', Port: ' . $db_port . ')'
     ]));
 }
 
 if ($database->connect_error) {
     die(json_encode([
         'status' => 'error',
-        'message' => 'The database connection has failed! ' . $database->connect_error
+        'message' => 'The database connection has failed! ' . $database->connect_error . ' (Host: ' . $db_host . ', Port: ' . $db_port . ')'
     ]));
 }
 
